@@ -1,0 +1,27 @@
+project:
+  name: methane-gas-prediction
+  version: 1.0.0
+
+data:
+  raw_path: data/raw/Methane Gas From Different Crops.csv
+  window_size: 14
+  test_split: 0.2
+
+training:
+  batch_size: 32
+  epochs: 10
+  learning_rate: 0.001
+  seed: 42
+
+models:
+  tcn:
+    channels: 64
+    kernel_size: 3
+  lstm:
+    hidden_size: 64
+  rnn:
+    hidden_size: 64
+
+output:
+  model_dir: models/
+  report_dir: reports/

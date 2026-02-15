@@ -1,0 +1,24 @@
+[2026-01-29 16:03:00,056] INFO - Project: methane-gas-prediction v1.0.0
+[2026-01-29 16:03:00,057] INFO - Reading data from data/raw/Methane Gas From Different Crops.csv
+[2026-01-29 16:03:00,240] INFO - Using 96000 rows for training and 24000 for testing across 24 train runs and 6 test runs.
+[2026-01-29 16:03:00,348] INFO - Saved fitted preprocessor to models/preprocessor.joblib
+[2026-01-29 16:03:43,370] INFO - Built sequences – train: (95664, 14, 7), test: (23916, 14, 7)
+[2026-01-29 16:03:43,396] INFO - Training TCN model
+[2026-01-29 16:11:55,990] INFO - TCN RMSE: 0.0066
+[2026-01-29 16:11:55,991] INFO - TCN MAE: 0.0040
+[2026-01-29 16:11:55,991] INFO - TCN R2: 0.7181
+[2026-01-29 16:11:55,992] INFO - TCN MAPE: inf
+[2026-01-29 16:11:56,047] INFO - Saved TCN model to models/tcn.pt
+[2026-01-29 16:11:56,049] INFO - Training LSTM model
+[2026-01-29 16:19:58,006] INFO - LSTM RMSE: 0.0072
+[2026-01-29 16:19:58,020] INFO - LSTM MAE: 0.0045
+[2026-01-29 16:19:58,080] INFO - LSTM R2: 0.6614
+[2026-01-29 16:19:58,108] INFO - LSTM MAPE: inf
+[2026-01-29 16:19:58,269] INFO - Saved LSTM model to models/lstm.pt
+[2026-01-29 16:19:58,280] INFO - Training RNN model
+[2026-01-29 16:26:16,618] INFO - RNN RMSE: 0.0125
+[2026-01-29 16:26:16,619] INFO - RNN MAE: 0.0084
+[2026-01-29 16:26:16,619] INFO - RNN R2: -0.0114
+[2026-01-29 16:26:16,619] INFO - RNN MAPE: inf
+[2026-01-29 16:26:16,641] INFO - Saved RNN model to models/rnn.pt
+[2026-01-29 16:26:16,647] INFO - Saved model comparison report to reports/model_comparison.json
