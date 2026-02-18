@@ -2,9 +2,7 @@ import numpy as np
 from scipy.stats import ks_2samp
 
 def data_drift(reference: np.ndarray, current: np.ndarray, alpha=0.05):
-    """
-    Kolmogorov–Smirnov test for drift detection
-    """
+    # Kolmogorov–Smirnov test for drift detection
     drift_features = {}
 
     for i in range(reference.shape[1]):

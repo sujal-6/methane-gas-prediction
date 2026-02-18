@@ -8,9 +8,7 @@ class MethanePredictor:
         self.model.eval()
 
     def predict(self, sequence: np.ndarray):
-        """
-        sequence: shape (T, F)
-        """
+        # sequence: shape (T, F)
         with torch.no_grad():
             x = torch.tensor(sequence, dtype=torch.float32).unsqueeze(0)
             x = x.to(self.device)

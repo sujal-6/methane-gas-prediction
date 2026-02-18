@@ -3,7 +3,6 @@ from typing import Tuple
 import torch
 from torch.utils.data import DataLoader, TensorDataset
 
-
 def train_model(
     model: torch.nn.Module,
     X: torch.Tensor,
@@ -12,12 +11,7 @@ def train_model(
     lr: float = 1e-3,
     batch_size: int = 32,
 ) -> Tuple[torch.nn.Module, float]:
-    """
-    Generic trainer for sequence regression models.
 
-    Returns:
-        (trained_model, final_epoch_loss)
-    """
     device = "cuda" if torch.cuda.is_available() else "cpu"
     model.to(device)
 

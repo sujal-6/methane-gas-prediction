@@ -4,13 +4,7 @@ from typing import List
 
 
 class DataPreprocessor:
-    """
-    Handles:
-    - Crop encoding
-    - Numerical feature scaling
-    - Basic missing value handling
-    """
-
+    # Data handling
     def __init__(self) -> None:
         self.scaler = StandardScaler()
         self.crop_encoder = LabelEncoder()
@@ -24,10 +18,6 @@ class DataPreprocessor:
         ]
 
     def _fill_missing(self, df: pd.DataFrame) -> pd.DataFrame:
-        """
-        Simple missing value handling:
-        - Forward fill within each run, then global median for any remaining NaNs.
-        """
         df = df.copy()
         if "Run_ID" in df.columns:
             df = df.sort_values(["Run_ID", "Day"])
@@ -40,9 +30,6 @@ class DataPreprocessor:
         return df
 
     def fit_transform(self, df: pd.DataFrame) -> pd.DataFrame:
-        """
-        Fit encoders/scalers on the full dataset and return transformed copy.
-        """
         df = df.copy()
         df = self._fill_missing(df)
 
@@ -51,9 +38,6 @@ class DataPreprocessor:
         return df
 
     def transform(self, df: pd.DataFrame) -> pd.DataFrame:
-        """
-        Transform new data using already-fitted encoders/scalers.
-        """
         df = df.copy()
         df = self._fill_missing(df)
 

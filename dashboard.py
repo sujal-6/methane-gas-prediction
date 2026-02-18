@@ -16,17 +16,14 @@ from src.models.lstm import LSTMModel
 from src.models.rnn import RNNModel
 from src.models.tcn import TCN
 
-
 MODEL_DIR = "models"
 REPORT_DIR = "reports"
 DATA_PATH = "data/raw/Methane Gas From Different Crops.csv"
 WINDOW_SIZE = 14
 
-
 @st.cache_resource
 def load_preprocessor() -> DataPreprocessor:
     return joblib.load(os.path.join(MODEL_DIR, "preprocessor.joblib"))
-
 
 @st.cache_resource
 def load_base_models(num_features: int) -> Dict[str, MethanePredictor]:
@@ -44,14 +41,12 @@ def load_base_models(num_features: int) -> Dict[str, MethanePredictor]:
             models[name] = MethanePredictor(base, device="cpu")
     return models
 
-
 def load_comparison_report() -> Dict:
     path = os.path.join(REPORT_DIR, "model_comparison.json")
     if not os.path.exists(path):
         return {}
     with open(path, "r") as f:
         return json.load(f)
-
 
 def main() -> None:
     st.set_page_config(
@@ -61,7 +56,7 @@ def main() -> None:
 
     st.title("Methane Gas Prediction From Crops")
     st.markdown(
-        "Production-style benchmarking of **TCN**, **LSTM**, and **RNN** for daily methane prediction."
+        "Benchmarking of **TCN**, **LSTM**, and **RNN** for daily methane prediction."
     )
 
     # Load data and models
@@ -73,7 +68,6 @@ def main() -> None:
 
     tabs = st.tabs(["Overview", "Per-run Analysis", "Interactive Prediction"])
 
-    # Overview tab
     with tabs[0]:
         st.subheader("Global Model Comparison")
         comparison = load_comparison_report()
@@ -108,7 +102,6 @@ def main() -> None:
         )
         st.line_chart(chart_df)
 
-    # Per-run analysis
     with tabs[1]:
         st.subheader("Per-run Performance")
         runs = sorted(df_raw["Run_ID"].unique().tolist())
@@ -134,14 +127,8 @@ def main() -> None:
         chart_df = pd.DataFrame({"Actual": y_run, "Predicted": preds})
         st.line_chart(chart_df)
 
-    # Interactive prediction
     with tabs[2]:
         st.subheader("What-if Scenario Prediction")
-        st.markdown(
-            "Upload a CSV with the same schema as the training data (excluding `Daily_Methane_m3`) "
-            "or manually configure the last window of timesteps."
-        )
-
         uploaded = st.file_uploader("Upload sequence CSV", type=["csv"])
         selected_model_name = st.selectbox(
             "Model for prediction", list(models.keys()), key="interactive_model"

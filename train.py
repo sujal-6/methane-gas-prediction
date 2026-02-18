@@ -18,16 +18,13 @@ from src.models.trainer import train_model
 from src.utils.io import save_model
 from src.utils.seed import set_seed
 
-
 CONFIG_PATH = "config/config.yaml"
-
 
 def load_config(path: str) -> Dict:
     import yaml
 
     with open(path, "r") as f:
         return yaml.safe_load(f)
-
 
 def main() -> None:
     cfg = load_config(CONFIG_PATH)
@@ -41,7 +38,6 @@ def main() -> None:
     preprocessor = DataPreprocessor()
     df_proc = preprocessor.fit_transform(df)
 
-    # Persist preprocessor for API / Streamlit use
     joblib.dump(preprocessor, os.path.join(cfg["output"]["model_dir"], "preprocessor.joblib"))
 
     X, y = build_sequences(df_proc, window=cfg["data"]["window_size"])
@@ -89,14 +85,13 @@ def main() -> None:
         }
         save_model(trained_model, model_path, metadata=meta)
 
-        print(f"✅ Saved {name.upper()} model to {model_path}")
+        print(f"Saved {name.upper()} model to {model_path}")
 
-    # Save global comparison report
     comparison_path = os.path.join(cfg["output"]["report_dir"], "model_comparison.json")
     with open(comparison_path, "w") as f:
         json.dump(comparison, f, indent=4)
 
-    print(f"\n📊 Model comparison report saved to {comparison_path}")
+    print(f"\n Model comparison report saved to {comparison_path}")
 
 
 if __name__ == "__main__":

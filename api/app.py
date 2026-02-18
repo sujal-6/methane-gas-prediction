@@ -101,7 +101,6 @@ def predict(payload: PredictRequest) -> PredictResponse:
         "Lignin_percent",
     ]
 
-    # Use last window_size timesteps, consistent with training
     seq = df_proc.sort_values("Day").iloc[-payload.window_size :][feature_cols].values
     num_features = seq.shape[1]
 

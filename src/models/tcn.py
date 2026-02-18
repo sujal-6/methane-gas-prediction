@@ -3,11 +3,7 @@ from typing import List
 import torch
 import torch.nn as nn
 
-
 class TemporalBlock(nn.Module):
-    """
-    Basic causal temporal block with dilated convolutions and residual connection.
-    """
 
     def __init__(
         self,
@@ -63,9 +59,6 @@ class TemporalBlock(nn.Module):
 
 
 class TCN(nn.Module):
-    """
-    Temporal Convolutional Network for sequence regression.
-    """
 
     def __init__(
         self,
@@ -101,22 +94,13 @@ class TCN(nn.Module):
         )
 
     def forward(self, x: torch.Tensor) -> torch.Tensor:
-        """
-        Args:
-            x: (batch, time, features)
-        Returns:
-            (batch, 1)
-        """
+        # x: (batch, time, features)
         x = x.permute(0, 2, 1)  # (B, F, T)
         x = self.network(x)
         return self.head(x)
 
 
 class TCNWithCropEmbedding(nn.Module):
-    """
-    Example extension TCN that treats crop as an embedding.
-    Not wired into training by default but kept for future use.
-    """
 
     def __init__(
         self,

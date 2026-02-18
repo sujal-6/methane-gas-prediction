@@ -11,7 +11,6 @@ def save_model(model, path: str, metadata: dict = None):
         with open(meta_path, "w") as f:
             json.dump(metadata, f, indent=4)
 
-
 def load_model(model, path: str, device="cpu"):
     model.load_state_dict(torch.load(path, map_location=device))
     model.eval()
